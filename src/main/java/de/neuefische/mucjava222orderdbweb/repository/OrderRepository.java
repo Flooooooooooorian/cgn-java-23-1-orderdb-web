@@ -21,7 +21,7 @@ public class OrderRepository {
 
     public Order get(String id) {
         for (Order order : orders) {
-            if (order.getId().equals(id)) {
+            if (order.id().equals(id)) {
                 return order;
             }
         }

@@ -48,4 +48,8 @@ public class ShopService {
         Order newOrder = new Order(orderId, products);
         return orderRepository.add(newOrder);
     }
+
+    public Product addProduct(Product product) {
+        return productRepository.add(product);
+    }
 }

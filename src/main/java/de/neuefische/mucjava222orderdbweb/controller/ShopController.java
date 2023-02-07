@@ -3,9 +3,7 @@ package de.neuefische.mucjava222orderdbweb.controller;
 import de.neuefische.mucjava222orderdbweb.model.Product;
 import de.neuefische.mucjava222orderdbweb.model.Order;
 import de.neuefische.mucjava222orderdbweb.service.ShopService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +22,28 @@ public class ShopController {
         return shopService.listProducts();
     }
 
+    @GetMapping("products/{id}")
+    public Product getProduct(@PathVariable String id) {
+        return shopService.getProduct(id);
+    }
+
     @GetMapping("orders")
     public List<Order> getAllOrders() {
         return shopService.listOrders();
+    }
+
+    @GetMapping("orders/{id}")
+    public Order getOrder(@PathVariable String id) {
+        return shopService.getOrder(id);
+    }
+
+    @PostMapping("products")
+    public Product addProduct(Product product) {
+        return shopService.addProduct(product);
+    }
+
+    @PostMapping("orders/{id}")
+    public Order addOrder(@PathVariable String id, @RequestBody List<String> productIds) {
+        return shopService.addOrder(id, productIds);
     }
 }
