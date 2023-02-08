@@ -38,7 +38,7 @@ public class ShopController {
     }
 
     @PostMapping("products")
-    public Product addProduct(Product product) {
+    public Product addProduct(@RequestBody Product product) {
         return shopService.addProduct(product);
     }
 
