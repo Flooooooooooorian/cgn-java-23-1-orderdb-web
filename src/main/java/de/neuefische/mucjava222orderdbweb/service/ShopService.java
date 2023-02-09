@@ -8,16 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ShopService {
 
     private OrderRepository orderRepository;
     private ProductRepository productRepository;
+    private IdService idService;
 
-    public ShopService(OrderRepository orderRepository, ProductRepository productRepository) {
+    public ShopService(OrderRepository orderRepository, ProductRepository productRepository, IdService idService) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
+        this.idService = idService;
     }
 
     public Product getProduct(String id) {
@@ -50,6 +53,9 @@ public class ShopService {
     }
 
     public Product addProduct(Product product) {
-        return productRepository.add(product);
+        String id = idService.generateId();
+        Product productWithId = new Product(product.name(), id);
+
+        return productRepository.add(productWithId);
     }
 }

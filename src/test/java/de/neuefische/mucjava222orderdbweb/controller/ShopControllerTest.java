@@ -10,8 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -43,9 +42,9 @@ class ShopControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
-                        "name": "testName",
-                        "id": "123"
+                        "name": "testName"
                         }
-                        """));
+                        """))
+                .andExpect(jsonPath("$.id").isNotEmpty());
     }
 }
